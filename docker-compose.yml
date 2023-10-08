@@ -16,22 +16,22 @@ services:
              python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db
-      - DB_NAME=devdb
-      - DB_USER=devuser
+      - DB_NAME=dev_db
+      - DB_USER=dev_user
       - DB_PASS=password
     depends_on:
       - db
     container_name: re_backend
 
   db:
-    image: postgres
+    image: postgres:16.0
     volumes:
       - dev-db-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=devdb
-      - POSTGRES_USER=devuser
+      - POSTGRES_DB=dev_db
+      - POSTGRES_USER=dev_user
       - POSTGRES_PASSWORD=password
-    container_name: re_db
+    container_name: re_database
 
 volumes:
   dev-db-data:
