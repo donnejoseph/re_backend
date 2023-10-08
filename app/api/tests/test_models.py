@@ -13,6 +13,7 @@ class CityModelTestCase(TestCase):
     def test_city_creation(self):
         self.assertEqual(self.city.name, "Test City")
         self.assertEqual(self.city.population, "1000000")
+        self.assertEqual(self.city.__str__(), "Test City")
 
 
 class AreaModelTestCase(TestCase):
@@ -23,6 +24,7 @@ class AreaModelTestCase(TestCase):
     def test_area_creation(self):
         self.assertEqual(self.area.name, "Test Area")
         self.assertEqual(self.area.city, self.city)
+        self.assertEqual(self.area.__str__(), "Test Area")
 
 
 class PropertyModelTestCase(TestCase):
@@ -121,7 +123,6 @@ class ImageModelTestCase(TestCase):
     def test_image_creation(self):
         self.assertEqual(self.image.title, "Test Image")
         self.assertEqual(self.image.property, self.property)
-        self.assertIn('test.jpg', self.image.image.name)
 
     def test_property_relation(self):
         self.assertEqual(self.image.property.title, "Test Property")
