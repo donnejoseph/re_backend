@@ -5,7 +5,7 @@ from django.utils.timezone import now
 def upload_to(instance, filename):
     if instance._meta.model_name == 'image':
         instance.id = instance.property.id
-    return 'assets/images/{}/{}/{}'.format("products", instance.id, filename)
+    return 'assets/images/{}/{}/{}'.format("property", instance.id, filename)
 
 
 class City(models.Model):
