@@ -1,6 +1,6 @@
 from django.test import TestCase
 from api.models import City, Area, Property, Image
-from api.serializers import CitySerializer, AreaSerializer, PropertySerializer, ImageSerializer
+from api.serializers import CitySerializer, AreaSerializer, PropertyListSerializer, ImageSerializer
 
 
 class CitySerializerTestCase(TestCase):
@@ -37,14 +37,14 @@ class PropertySerializerTestCase(TestCase):
             price=1000000,
             # Add other necessary fields here or update model to have sensible defaults/null as valid
         )
-        self.serializer = PropertySerializer(instance=self.property)
+        self.serializer = PropertyListSerializer(instance=self.property)
 
     def test_contains_expected_fields(self):
         data = self.serializer.data
         self.assertCountEqual(data.keys(), ['id', 'title', 'address', 'city', 'state', 'area', 'description',
                                             'sale_type', 'price', 'bedrooms', 'bathrooms', 'home_type',
                                             'square_fit', 'object_id', 'is_published', 'building_year',
-                                            'best_offer', 'modx_id'])
+                                            'best_offer', 'modx_id', 'photo_main'])
 
 
 class ImageSerializerTestCase(TestCase):

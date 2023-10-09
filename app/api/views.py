@@ -5,7 +5,7 @@ from rest_framework.exceptions import NotFound
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
-from api.serializers import PropertySerializer
+from api.serializers import PropertyListSerializer, PropertyDetailSerializer
 from api.models import Property
 
 logger = logging.getLogger(__name__)
@@ -15,7 +15,7 @@ class PropertyList(ListAPIView):
     """
     List all properties.
     """
-    serializer_class = PropertySerializer
+    serializer_class = PropertyListSerializer
 
     def get_queryset(self):
         return Property.objects.filter(is_published=True).order_by('-object_id')
@@ -24,7 +24,7 @@ class PropertyList(ListAPIView):
         operation_summary="List all properties",
         operation_description="List all properties",
         responses={
-            200: PropertySerializer(many=True),
+            200: PropertyListSerializer(many=True),
             400: "Bad Request",
             500: "Error communicating with the server. Please try again later."
         }
@@ -67,13 +67,13 @@ class PropertyDetail(APIView):
     Retrieve a property instance.
     """
     queryset = Property.objects.filter(is_published=True)
-    serializer_class = PropertySerializer
+    serializer_class = PropertyDetailSerializer
 
     @swagger_auto_schema(
         operation_summary="Retrieve a property instance",
         operation_description="Retrieve a property instance",
         responses={
-            200: PropertySerializer(),
+            200: PropertyDetailSerializer(),
             400: "Bad Request",
             500: "Error communicating with the server. Please try again later."
         }
